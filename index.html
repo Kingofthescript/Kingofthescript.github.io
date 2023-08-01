@@ -22,20 +22,26 @@
             cursor: pointer;
             border-radius: 5px;
         }
+        #ipAddress {
+            font-size: 20px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <button class="button" onclick="showIPAddress()">Show My IP Address</button>
+    <p id="ipAddress"></p>
 
     <script>
         function showIPAddress() {
+            const ipAddressElement = document.getElementById('ipAddress');
             fetch('https://api.ipify.org?format=json')
                 .then(response => response.json())
                 .then(data => {
-                    alert("Your IP address is: " + data.ip);
+                    ipAddressElement.textContent = "Your IP address is: " + data.ip;
                 })
                 .catch(error => {
-                    alert("Error occurred while fetching your IP address.");
+                    ipAddressElement.textContent = "Error occurred while fetching your IP address.";
                     console.error(error);
                 });
         }
